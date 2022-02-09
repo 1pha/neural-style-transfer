@@ -4,7 +4,7 @@
 Neural Style Transfer가 무엇인지 *가볍게* 이해학고 dJango로 업로드하는 것까지 같이 진행해봅시다 :)
 
 ## Contents
-+ [Neural Style Transfer가 뭔가요?]("neural_style_transfer.ipynb")
++ [Neural Style Transfer가 뭔가요?](neural_style_transfer.ipynb)
 + dJango에 딥러닝 모델은 어떻게 올릴까?
 
 ## Reference
