@@ -15,30 +15,80 @@
             display: block;
             text-align: center;
         }
+        .btn {
+            margin: 10px auto;
+        }
+
+        .image {
+            width: 400px;
+            object-fit: cover;
+        }
+
+        .op {
+            width: 10px;
+            margin: 20px auto;
+        }
+
     </style>
+
 </head>
 <body>
     <div class="container">
         <div class="row align-items-center">
             <div class="col">
                 <h3>Content Image</h3>
-                {% load static %} <img src="{% static "content_images/content1.jpeg" %}" alt="..."/>
+                {% load static %} <img id="defaultContent" class="image" alt="..." src="{% static "content_images/content1.jpeg" %}"/>
+                <img src="" id="newContent" class="image" alt=""/>
+                <input type="file" id="inputContent" class="btn btn-outline-primary">
+                <button id="sendContent" class="btn btn-outline-primary">Upload</button>
             </div>
             <div class="col op">
                 <h3>+</h3>
             </div>
             <div class="col">
                 <h3>Style Image</h3>
-                {% load static %} <img src="{% static "style_images/style1.jpeg" %}" alt="..."/>
+                {% load static %} <img id="defaultStyle" class="image" alt="..." src="{% static "style_images/style1.jpeg" %}" />
+                <img src="" id="newStyle" class="image" alt=""/>
+                <input type="file" id="inputStyle" class="btn btn-outline-primary">
+                <button id="sendStyle" class="btn btn-outline-primary">Upload</button>
             </div>
-            <div class="col">
+            <div class="col op">
                 <h3>=</h3>
             </div>
             <div class="col">
                 <h3>Transferred Image</h3>
-                {% load static %} <img src="{% static "transferred_images/output.png" %}" alt="..."/>
+                {% load static %} <img id="transfer" class="image" alt="..." src="{% static "transferred_images/output.png" %}"/><br>
+                    <a href="/transfer" type="button" class="btn btn-outline-danger">Transfer!!</a>
+                <button type="button" class="btn btn-outline-danger">Transfer!</button>
             </div>
         </div>
     </div>
+    <script>
+        document.querySelector("#sendContent").addEventListener('click', () => {
+            let selectFile = document.querySelector("#inputContent").files[0];
+            const file = URL.createObjectURL(selectFile);
+            document.querySelector("#newContent").src = file;
+
+            let defaultContent = document.querySelector("#defaultContent");
+            // defaultContent.style.visibility = "hidden";
+            defaultContent.remove();
+            let newContent = document.querySelector("#newContent")
+            newContent.style.visibility = "visible";
+        })
+
+        document.querySelector("#sendStyle").addEventListener('click', () => {
+            let selectFile = document.querySelector("#inputStyle").files[0];
+            const file = URL.createObjectURL(selectFile);
+            document.querySelector("#newStyle").src = file;
+
+            let defaultStyle = document.querySelector("#defaultStyle");
+            // defaultContent.style.visibility = "hidden";
+            defaultStyle.remove();
+            let newStyle = document.querySelector("#newStyle")
+            newStyle.style.visibility = "visible";
+        })
+    </script>
+
+
 </body>
 </html>
