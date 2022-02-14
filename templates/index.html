@@ -58,8 +58,7 @@
             <div class="col">
                 <h3>Transferred Image</h3>
                 {% load static %} <img id="transfer" class="image" alt="..." src="{% static "transferred_images/output.png" %}"/><br>
-                    <a href="/transfer" type="button" class="btn btn-outline-danger">Transfer!!</a>
-                <button type="button" class="btn btn-outline-danger">Transfer!</button>
+                <button type="button" class="btn btn-outline-danger" id="transfer-btn">Transfer!</button>
             </div>
         </div>
     </div>
@@ -87,6 +86,46 @@
             let newStyle = document.querySelector("#newStyle")
             newStyle.style.visibility = "visible";
         })
+
+        document.querySelector("#transfer-btn").addEventListener('click', async ()=>{
+            
+            
+            var source_url = document.querySelector("#newContent").src;
+            var style_url = document.querySelector("#newStyle").src;
+            
+            if(!source_url.includes("blob") || !style_url.includes("blob") ){
+                alert("Please upload the images");
+                return
+            }
+
+            var source_blob = await fetch(source_url).then(r => r.blob());
+            var source_image = await blobToBase64(source_blob);
+            var style_blob = await fetch(source_url).then(r => r.blob());
+            var style_image = await blobToBase64(style_blob);
+
+            
+
+            var res = await fetch('/transfer/',{
+                                method:'POST',
+                                body: JSON.stringify({'source_image':source_image, 'style_image':style_image}),
+                                header:{
+                                    'Content-Type': 'application/json'
+                                }
+                            }).then(res=>{return res.json()})
+            
+            document.querySelector("#transfer").src = res['new_image'];
+
+        });
+
+        function blobToBase64(blob) {
+            return new Promise((resolve, _) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.readAsDataURL(blob);
+            });
+        }
+
+        
     </script>
 
 
