@@ -3,5 +3,6 @@ from . import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path("", views.main, name="index")
+    path("", views.main, name="index"),
+    path("transfer/", views.transfer, name="transfer"),
 ] + staticfiles_urlpatterns()
