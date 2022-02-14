@@ -8,7 +8,11 @@ authors = ["Daehyun Cho <1phantasmas@korea.ac.kr>"]
 #python = "^3.9"
 Django = "^4.0.2"
 python = ">=3.9,<3.11"
-tensorflow = "^2.8.0"
+jupyter = "^1.0.0"
+ipython = "^8.0.1"
+matplotlib = "^3.5.1"
+tensorflow-hub = "^0.12.0"
+tensorflow-gpu = "^2.8.0"
 
 [tool.poetry.dev-dependencies]
 
